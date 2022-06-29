@@ -1,29 +1,21 @@
 const user = require('../database/models/user');
-const { generateJWTToken} = require('../utils/jwt');
+const { generateJWTToken } = require('../utils/jwt');
 
-const authenticate = async ({ email, password } => {
-  if(!email|| !password) {
-    throw{status: 401, message: 'Faltam dados'};
+const authenticate = async ({ email, password }) => {
+  if (!email || !password) {
+    const error = { status: 400, message: 'Some required fields are missing' };
+    throw error;
   }
-  const token = generateJWTToken(user.dataValues);
+  const userLogin = await user.findOne({
+    where: { email, password },
+  });
+
+  if (!userLogin) {            
+    const error = { status: 400, message: 'Invalid fields' };
+    throw error;
+  }
+  const token = generateJWTToken(email);
   return { token };
-});
-// const { Op } = require('sequelize');
-// const { User } = require('../database/models');
+};
 
-//  const getUser = () => {
-//   return User.findAll({ includes: { model: User, as: 'user' },
-//   attributes: { exclude: ['password'] },
-//   where: {
-//     [Op.and]: [
-//       { email: 'teste1@teste.com' },
-//       { name: 'Usuário' },
-//     ],
-//     [Op.or]: [
-//       { active: true },
-//     ],
-//   },
-//  });
-//  };
-
- module.exports = ;
+module.exports = { authenticate };
