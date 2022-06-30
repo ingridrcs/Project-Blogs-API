@@ -3,14 +3,14 @@ const postCategorySchema = (sequelize, DataTypes) => {
     postId: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true
     },
     categoryId: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true
     }
-  })
+  },
+  { timestamps: false },
+  )
   postCategoryTable.associate = (models) => {
     models.BlogPost.belongsToMany(models.Category, {
       as: 'categories',
