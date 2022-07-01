@@ -9,4 +9,9 @@ const addUser = async (req, res) => {
     return res.status(409).json({ message: error.message });
   }
 };
-module.exports = { addUser };
+
+const getUser = async (req, res) => {
+const allUsers = await userService.getUser();
+res.status(200).json(allUsers);
+};
+module.exports = { addUser, getUser };
