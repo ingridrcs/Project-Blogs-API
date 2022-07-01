@@ -25,4 +25,12 @@ const allUsers = await User.findAll({
 });
 return allUsers;
 };
-module.exports = { addUser, getUser };
+
+const getUserId = async (id) => {
+  const userId = await User.findOne({ 
+    where: { id }, 
+    attributes: { exclude: ['password'] }, 
+  });
+  return userId;
+};
+module.exports = { addUser, getUser, getUserId };
