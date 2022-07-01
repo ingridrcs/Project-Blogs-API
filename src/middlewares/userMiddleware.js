@@ -1,21 +1,23 @@
-const userValidation = (req, res, next) => {
-  const { displayName, email, password } = req.body;
-  const dateRegex = /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/i;
+const emailValidation = (req, res, next) => {
+  const { displayName, email } = req.body;
+  const dateRegex = /\S+@\S+\.\S+/;
   if (displayName.length < 8) {
     return res.status(400)
-    .json({ message: '"displayName" length must be at least 8 characters long"' });
+    .json({ message: '"displayName" length must be at least 8 characters long' });
   }
   if (!dateRegex.test(email)) {
     return res.status(400).json({ message: '"email" must be a valid email' });
   }
+  next();
+};
+
+const passwordValidation = (req, res, next) => {
+  const { password } = req.body;
   if (password.length < 6) {
     return res.status(400)
     .json({ message: '"password" length must be at least 6 characters long' });
   }
-  if (email) {
-    return res.status(400).json({ message: 'User already registered' });
-  }
   next();
 };
 
-module.exports = userValidation;
+module.exports = { emailValidation, passwordValidation };
