@@ -7,4 +7,4 @@ const categoryValidation = (req, res, next) => {
   }
   next();
 };
-module.exports = categoryValidation;
+module.exports = { categoryValidation };
