@@ -6,7 +6,7 @@ const addUser = async ({ displayName, email, password, image }) => {
     where: { email },
   });
   if (newUser) {
-        const error = { status: 400, message: 'Some required fields are missing' };
+        const error = { status: 400, message: 'User already registered' };
     throw error;
   }
   const getToken = generateJWTToken(email);
