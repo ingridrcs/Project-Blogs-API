@@ -2,7 +2,7 @@ const postService = require('../services/userServices');
 
 const getBlogPost = async (_req, res) => {
   try {
-const allBlogPosts = await postService.getPost();
+  const allBlogPosts = await postService.getPost();
 return res.status(200).json(allBlogPosts);
   } catch (error) {
 console.log(error);
