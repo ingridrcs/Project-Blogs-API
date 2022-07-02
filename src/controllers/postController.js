@@ -1,4 +1,4 @@
-const postService = require('../services/userServices');
+const postService = require('../services/postServices');
 
 const getBlogPost = async (_req, res) => {
   try {
@@ -24,4 +24,13 @@ const getBlogPostId = async (req, res) => {
 return res.status(404).json({ message: 'Post does not exist' });
   }
 };
+// const addBlogPost = async (req, res) => {
+//       try {
+//   const addPost = await postService.addBlogPost(req.body);
+//   res.status(201).json({ addPost });
+//   } catch (error) {
+//     console.log(error);
+//     return res.status(409).json({ message: error.message });
+//   }
+// };
 module.exports = { getBlogPost, getBlogPostId };
