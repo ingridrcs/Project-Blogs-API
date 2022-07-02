@@ -20,4 +20,19 @@ const getPostId = async (id) => {
   });
   return userId;
 };
+// const addBlogPost = async ({ title, content, published, updated }, userId) => {
+//   const newPost = await User.findOne({
+//     where: { email },
+//   });
+//   if (newPost) {
+//         const error = { status: 400, message: 'User already registered' };
+//     throw error;
+//   }
+//   const newBlogPost = BlogPost.create({
+//     title,
+//     content,
+//     userId,
+//   });
+//   return newBlogPost;
+// };
 module.exports = { getPost, getPostId };
